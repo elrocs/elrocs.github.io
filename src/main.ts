@@ -23,7 +23,7 @@ type Particle = {
 
 // Initialize the grid with null particles
 const grid: Particle[][] = Array.from({ length: ROWS }, () =>
-  Array(COLS).fill(null)
+  Array(COLS).fill(null),
 )
 
 // Draw the grid on the canvas

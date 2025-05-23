@@ -1,29 +1,37 @@
-import { defineConfig } from "eslint-define-config";
+import tsParser from '@typescript-eslint/parser'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
 
-export default defineConfig({
-  root: true,
-  env: {
-    browser: true,
-    es2021: true,
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+export default [
+  {
+    files: ['*.ts', '*.tsx', '*.js'],
+    ignores: ['eslint.config.js'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+    },
+    rules: {
+      semi: ['error', 'always'],
+      indent: ['error', 2],
+      quotes: ['error', 'single'],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['warn'],
+    },
   },
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: "./tsconfig.json",
+  {
+    ignores: ['dist/**', 'node_modules/**', 'assets/**', 'public/**'],
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  plugins: [
-    "@typescript-eslint"
-  ],
-  rules: {
-    semi: ["error", "always"],
-    indent: ["error", 2],
-    quotes: ["error", "single"],
-    "no-unused-vars": "off",      
-    "@typescript-eslint/no-unused-vars": ["warn"],
-  },
-});
+]

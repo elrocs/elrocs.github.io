@@ -39,7 +39,8 @@ export class Powder extends Solid {
 
       // If one or both diagonal paths are free, choose one randomly
       if (directions.length > 0) {
-        const [dx, dy] = directions[Math.floor(Math.random() * directions.length)]
+        const [dx, dy] =
+          directions[Math.floor(Math.random() * directions.length)]
         this.move_to(grid, this.x + dx, this.y + dy)
       }
     }
