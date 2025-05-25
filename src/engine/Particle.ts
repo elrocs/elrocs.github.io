@@ -2,11 +2,13 @@ export class Particle {
   x: number
   y: number
   color: string
+  spawnDensity: number
 
-  constructor(x: number, y: number, color: string) {
+  constructor(x: number, y: number) {
     this.x = x
     this.y = y
-    this.color = color
+    this.spawnDensity = 1
+    this.color = '#fff'
   }
 
   /**
@@ -17,10 +19,7 @@ export class Particle {
    * @returns true if (x, y) is inside grid bounds
    */
   inbounds(grid: (Particle | null)[][], x: number, y: number): boolean {
-    return (
-      y >= 0 && y < grid.length &&
-      x >= 0 && x < grid[y].length
-    )
+    return y >= 0 && y < grid.length && x >= 0 && x < grid[y].length
   }
 
   /**
@@ -38,4 +37,5 @@ export class Particle {
       grid[new_y][new_x] = this
     }
   }
+
 }

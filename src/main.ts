@@ -1,9 +1,10 @@
 // main.ts
 
-import { setupInput } from './utils/inputHandler.js'
+import { setupInput } from './engine/input/inputHandler'
 
-import { Sand } from './engine/elements/Sand.js'
-import { Particle } from './engine/Particle.js'
+import { Sand } from './engine/elements/Sand'
+import { Particle } from './engine/Particle'
+import { ParticleSpawner } from './engine/input/particleSpawner'  // Asumo que esta clase la tienes exportada
 
 // Select the canvas element and get the 2D rendering context
 const canvas = document.querySelector('canvas') as HTMLCanvasElement
@@ -22,10 +23,9 @@ const COLS = WIDTH / PIXEL_SIZE
 type ParticleConstructor = new (x: number, y: number) => Particle
 let currentParticleType: ParticleConstructor = Sand
 
-
 // Initialize the grid with null particles
-const grid: Particle[][] = Array.from({ length: ROWS }, () =>
-  Array(COLS).fill(null)
+const grid: (Particle | null)[][] = Array.from({ length: ROWS }, () =>
+  Array(COLS).fill(null),
 )
 
 // Draw the grid on the canvas
@@ -45,7 +45,6 @@ function draw(): void {
 
 // Update the grid particles
 function updateGrid(): void {
-  // Loop from bottom to top so particles fall correctly
   for (let y = ROWS - 1; y >= 0; y--) {
     for (let x = 0; x < COLS; x++) {
       const cell = grid[y][x]
@@ -56,13 +55,36 @@ function updateGrid(): void {
   }
 }
 
-// Setup input handling
-setupInput(canvas, PIXEL_SIZE, COLS, ROWS, createParticle, Sand)
+// ParticleSpawner instance
+const spawner = new ParticleSpawner(5, 8) // por ejemplo, radio=5, 8 partículas por tick
+
+// Function to create a particle at (x, y) of a specific type if espacio libre
+function createParticle(x: number, y: number, ParticleType: ParticleConstructor): void {
+  if (grid[y][x] === null) {
+    grid[y][x] = new ParticleType(x, y)
+  }
+}
+
+// Función para devolver el tipo de partícula actual seleccionada
+function getCurrentParticleType(): ParticleConstructor {
+  return currentParticleType
+}
+
+// Setup input with la nueva función
+setupInput(
+  canvas,
+  PIXEL_SIZE,
+  COLS,
+  ROWS,
+  spawner,
+  createParticle,
+  getCurrentParticleType,
+)
 
 // Main animation loop
 function loop(): void {
   updateGrid()
-  updateGrid() // Called twice, probably for physics accuracy or stability
+  updateGrid() // doble update para estabilidad o precisión física
   draw()
   requestAnimationFrame(loop)
 }

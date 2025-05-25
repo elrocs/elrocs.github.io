@@ -2,8 +2,8 @@ import { Particle } from './Particle.js'
 import { Solid } from './Solid.js'
 
 export class Powder extends Solid {
-  constructor(x: number, y: number, color: string) {
-    super(x, y, color)
+  constructor(x: number, y: number) {
+    super(x, y)
   }
 
   /**
@@ -40,7 +40,8 @@ export class Powder extends Solid {
 
       // If one or both diagonal paths are free, choose one randomly
       if (directions.length > 0) {
-        const [dx, dy] = directions[Math.floor(Math.random() * directions.length)]
+        const [dx, dy] =
+          directions[Math.floor(Math.random() * directions.length)]
         this.move_to(grid, this.x + dx, this.y + dy)
       }
     }
