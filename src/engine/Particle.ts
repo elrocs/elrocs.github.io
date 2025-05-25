@@ -16,14 +16,10 @@ export class Particle {
    * @param y - y coordinate to check
    * @returns true if (x, y) is inside grid bounds
    */
-  inbounds(grid: Array<Array<Particle | null>>, x: number, y: number): boolean {
+  inbounds(grid: (Particle | null)[][], x: number, y: number): boolean {
     return (
-      Array.isArray(grid) &&
-      y >= 0 &&
-      y < grid.length &&
-      Array.isArray(grid[y]) &&
-      x >= 0 &&
-      x < grid[y].length
+      y >= 0 && y < grid.length &&
+      x >= 0 && x < grid[y].length
     )
   }
 
@@ -34,7 +30,7 @@ export class Particle {
    * @param new_x - new x coordinate to move to
    * @param new_y - new y coordinate to move to
    */
-  move_to(grid: Array<Array<Particle | null>>, new_x: number, new_y: number): void {
+  move_to(grid: (Particle | null)[][], new_x: number, new_y: number): void {
     if (this.inbounds(grid, new_x, new_y) && grid[new_y][new_x] === null) {
       grid[this.y][this.x] = null
       this.x = new_x

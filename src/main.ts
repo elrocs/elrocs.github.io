@@ -1,5 +1,9 @@
-import { Sand } from './engine/elements/Sand.js'
+// main.ts
+
 import { setupInput } from './utils/inputHandler.js'
+
+import { Sand } from './engine/elements/Sand.js'
+import { Particle } from './engine/Particle.js'
 
 // Select the canvas element and get the 2D rendering context
 const canvas = document.querySelector('canvas') as HTMLCanvasElement
@@ -15,11 +19,9 @@ canvas.height = HEIGHT
 const ROWS = HEIGHT / PIXEL_SIZE
 const COLS = WIDTH / PIXEL_SIZE
 
-// Define the type for a particle or null in the grid
-type Particle = {
-  color: string
-  update: (grid: Array<Array<Particle | null>>) => void
-} | null
+type ParticleConstructor = new (x: number, y: number) => Particle
+let currentParticleType: ParticleConstructor = Sand
+
 
 // Initialize the grid with null particles
 const grid: Particle[][] = Array.from({ length: ROWS }, () =>
@@ -54,13 +56,8 @@ function updateGrid(): void {
   }
 }
 
-// Create a new particle of type Sand at position (x, y)
-function createParticle(x: number, y: number): void {
-  grid[y][x] = new Sand(x, y)
-}
-
 // Setup input handling
-setupInput(canvas, PIXEL_SIZE, COLS, ROWS, createParticle)
+setupInput(canvas, PIXEL_SIZE, COLS, ROWS, createParticle, Sand)
 
 // Main animation loop
 function loop(): void {

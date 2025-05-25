@@ -1,3 +1,4 @@
+import { Particle } from './Particle.js'
 import { Solid } from './Solid.js'
 
 export class Powder extends Solid {
@@ -10,7 +11,7 @@ export class Powder extends Solid {
    * It tries to fall straight down first,
    * then tries diagonally down-left or down-right randomly.
    */
-  update(grid: Array<Array<Solid | null>>): void {
+  update(grid: (Particle | null)[][]): void {
     // Try to fall straight down first
     if (
       this.inbounds(grid, this.x, this.y + 1) &&
