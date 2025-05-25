@@ -3,8 +3,9 @@
 import { setupInput } from './engine/input/inputHandler'
 
 import { Sand } from './engine/elements/Sand'
+import { Cobble } from './engine/elements/Cobble'
 import { Particle } from './engine/Particle'
-import { ParticleSpawner } from './engine/input/particleSpawner'  // Asumo que esta clase la tienes exportada
+import { ParticleSpawner } from './engine/input/particleSpawner' // Asumo que esta clase la tienes exportada
 
 // Select the canvas element and get the 2D rendering context
 const canvas = document.querySelector('canvas') as HTMLCanvasElement
@@ -19,9 +20,6 @@ canvas.height = HEIGHT
 
 const ROWS = HEIGHT / PIXEL_SIZE
 const COLS = WIDTH / PIXEL_SIZE
-
-type ParticleConstructor = new (x: number, y: number) => Particle
-let currentParticleType: ParticleConstructor = Sand
 
 // Initialize the grid with null particles
 const grid: (Particle | null)[][] = Array.from({ length: ROWS }, () =>
@@ -56,18 +54,25 @@ function updateGrid(): void {
 }
 
 // ParticleSpawner instance
-const spawner = new ParticleSpawner(5, 8) // por ejemplo, radio=5, 8 partículas por tick
+const spawner = new ParticleSpawner(3)
 
-// Function to create a particle at (x, y) of a specific type if espacio libre
-function createParticle(x: number, y: number, ParticleType: ParticleConstructor): void {
-  if (grid[y][x] === null) {
-    grid[y][x] = new ParticleType(x, y)
-  }
-}
+type ParticleConstructor = new (x: number, y: number) => Particle
+let currentParticleType: ParticleConstructor = Sand
 
 // Función para devolver el tipo de partícula actual seleccionada
 function getCurrentParticleType(): ParticleConstructor {
   return currentParticleType
+}
+
+// Function to create a particle at (x, y) of a specific type if espacio libre
+function createParticle(
+  x: number,
+  y: number,
+  ParticleType: ParticleConstructor,
+): void {
+  if (grid[y][x] === null) {
+    grid[y][x] = new ParticleType(x, y)
+  }
 }
 
 // Setup input with la nueva función
@@ -84,7 +89,7 @@ setupInput(
 // Main animation loop
 function loop(): void {
   updateGrid()
-  updateGrid() // doble update para estabilidad o precisión física
+  updateGrid()
   draw()
   requestAnimationFrame(loop)
 }
