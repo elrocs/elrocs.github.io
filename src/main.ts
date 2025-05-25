@@ -48,7 +48,7 @@ function updateGrid(): void {
   for (let y = ROWS - 1; y >= 0; y--) {
     for (let x = 0; x < COLS; x++) {
       const cell = grid[y][x]
-      if (cell && typeof cell.update === 'function') {
+      if (cell?.update) {
         cell.update(grid)
       }
     }

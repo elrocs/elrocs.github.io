@@ -38,4 +38,6 @@ export class Particle {
     }
   }
 
+  update?(grid: (Particle | null)[][]): void
+
 }
