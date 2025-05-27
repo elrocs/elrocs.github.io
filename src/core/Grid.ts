@@ -5,14 +5,14 @@ import { Particle } from '@engine/Particle'
  * can hold a Particle object. It handles rendering and updating of particles.
  */
 export class Grid {
-  private readonly canvas: HTMLCanvasElement
-  private readonly ctx: CanvasRenderingContext2D
-  private readonly WIDTH: number
-  private readonly HEIGHT: number
-  private readonly PIXEL_SIZE: number
-  private readonly COLS: number
-  private readonly ROWS: number
-  private grid: (Particle | null)[][]
+  public readonly canvas: HTMLCanvasElement
+  public readonly ctx: CanvasRenderingContext2D
+  public readonly WIDTH: number
+  public readonly HEIGHT: number
+  public readonly PIXEL_SIZE: number
+  public readonly COLS: number
+  public readonly ROWS: number
+  public grid: (Particle | null)[][]
 
   /**
    * Initializes a new Grid instance
@@ -79,12 +79,10 @@ export class Grid {
    * Calls the `update` method on each non-null particle.
    */
   public update(): void {
-    for (let y = 0; y < this.ROWS; y++) {
+    for (let y = this.ROWS - 1; y >= 0; y--) {
       for (let x = 0; x < this.COLS; x++) {
         const cell = this.grid[y][x]
-
-        // If the cell contains a particle with an update method, call it
-        if (cell?.update) {
+        if (cell && typeof cell.update === 'function') {
           cell.update(this.grid)
         }
       }

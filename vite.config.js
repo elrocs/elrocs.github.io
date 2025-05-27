@@ -13,6 +13,7 @@ export default defineConfig({
       '@core': path.resolve(__dirname, './src/core'),
       '@engine': path.resolve(__dirname, './src/engine'),
       '@particles': path.resolve(__dirname, './src/particles'),
+      '@utils': path.resolve(__dirname, './src/utils'),
     },
   },
 })

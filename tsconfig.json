@@ -16,7 +16,8 @@
     "paths": {
       "@core/*": ["core/*"],
       "@engine/*": ["engine/*"],
-      "@particles/*": ["particles/*"]
+      "@particles/*": ["particles/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src/**/*"],
