@@ -11,7 +11,7 @@ const PIXEL_SIZE = 4
 
 let grid = new Grid(canvas, WIDTH, HEIGHT, PIXEL_SIZE)
 
-let spawner = new ParticleSpawner(grid.grid, 3, grid.COLS, grid.ROWS)
+let spawner = new ParticleSpawner(grid.grid, 5, grid.COLS, grid.ROWS)
 
 canvas.addEventListener('click', (event) => {
   const rect = canvas.getBoundingClientRect()

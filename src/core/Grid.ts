@@ -84,6 +84,7 @@ export class Grid {
         const cell = this.grid[y][x]
         if (cell && typeof cell.update === 'function') {
           cell.update(this.grid)
+          cell.update(this.grid)
         }
       }
     }
