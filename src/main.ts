@@ -1,11 +1,6 @@
 // main.ts
 
-import { setupInput } from './engine/input/inputHandler'
-
-import { Sand } from './engine/elements/Sand'
-import { Cobble } from './engine/elements/Cobble'
 import { Particle } from './engine/Particle'
-import { ParticleSpawner } from './engine/input/particleSpawner' // Asumo que esta clase la tienes exportada
 
 // Select the canvas element and get the 2D rendering context
 const canvas = document.querySelector('canvas') as HTMLCanvasElement
@@ -52,39 +47,6 @@ function updateGrid(): void {
     }
   }
 }
-
-// ParticleSpawner instance
-const spawner = new ParticleSpawner(3)
-
-type ParticleConstructor = new (x: number, y: number) => Particle
-let currentParticleType: ParticleConstructor = Sand
-
-// Función para devolver el tipo de partícula actual seleccionada
-function getCurrentParticleType(): ParticleConstructor {
-  return currentParticleType
-}
-
-// Function to create a particle at (x, y) of a specific type if espacio libre
-function createParticle(
-  x: number,
-  y: number,
-  ParticleType: ParticleConstructor,
-): void {
-  if (grid[y][x] === null) {
-    grid[y][x] = new ParticleType(x, y)
-  }
-}
-
-// Setup input with la nueva función
-setupInput(
-  canvas,
-  PIXEL_SIZE,
-  COLS,
-  ROWS,
-  spawner,
-  createParticle,
-  getCurrentParticleType,
-)
 
 // Main animation loop
 function loop(): void {
