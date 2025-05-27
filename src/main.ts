@@ -6,7 +6,7 @@ const WIDTH = 512
 const HEIGHT = 512
 const PIXEL_SIZE = 4
 
-let grid = new Grid(canvas, WIDTH, HEIGHT, 4)
+let grid = new Grid(canvas, WIDTH, HEIGHT, PIXEL_SIZE)
 
 function loop(): void {
     grid.update()
