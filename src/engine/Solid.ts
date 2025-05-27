@@ -1,4 +1,4 @@
-import { Particle } from './Particle.js'
+import { Particle } from '@engine/Particle'
 
 // Extend the Particle base class with specific properties for Solid particles
 export class Solid extends Particle {

@@ -11,7 +11,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@core/*": ["core/*"],
+      "@engine/*": ["engine/*"],
+      "@particles/*": ["particles/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"],

@@ -1,4 +1,4 @@
-import { Powder } from '../Powder.js'
+import { Powder } from '@engine/Powder'
 
 export class Sand extends Powder {
   constructor(x: number, y: number) {

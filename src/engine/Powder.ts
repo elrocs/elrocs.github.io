@@ -1,5 +1,5 @@
-import { Particle } from './Particle.js'
-import { Solid } from './Solid.js'
+import { Particle } from '@engine/Particle'
+import { Solid } from '@engine/Solid'
 
 export class Powder extends Solid {
   constructor(x: number, y: number) {

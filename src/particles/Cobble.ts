@@ -1,4 +1,4 @@
-import { Solid } from '../Solid'
+import { Solid } from '@engine/Solid'
 
 export class Cobble extends Solid {
   constructor(x: number, y: number) {
