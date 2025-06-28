@@ -1,8 +1,18 @@
 # PixelBox
 
+![status](https://img.shields.io/badge/status-on--hold-yellow)
+
 **PixelBox** is a lightweight browser-based sandbox simulation. Combine fire, water, smoke, and other elements to watch them interact with realistic pixel physics.
 
 This project is open-source and licensed under the MIT License.
+
+## 📦 Project Status
+
+**🕒 On Hold** – This project is currently paused.  
+Development may resume in the future, but it's not actively maintained right now.  
+Feel free to explore the code, fork the project, or contribute if you’re interested.
+
+---
 
 ## ⚖️ License
 
